@@ -337,8 +337,8 @@
                         <div class="credential-item">
                             <div class="credential-label">👨‍💼 Admin Account</div>
                             <div class="credential-value">
-                                <span>admin@assamHeritage.com</span>
-                                <button class="copy-btn" onclick="copyToClipboard('admin@assamHeritage.com')">Copy</button>
+                                <span>admin@assamheritage.com</span>
+                                <button class="copy-btn" onclick="copyToClipboard('admin@assamheritage.com')">Copy</button>
                             </div>
                             <div class="credential-value" style="margin-top: 8px;">
                                 <span>Admin@123</span>
@@ -349,8 +349,8 @@
                         <div class="credential-item">
                             <div class="credential-label">🏪 Vendor Account</div>
                             <div class="credential-value">
-                                <span>vendor@assamHeritage.com</span>
-                                <button class="copy-btn" onclick="copyToClipboard('vendor@assamHeritage.com')">Copy</button>
+                                <span>vendor@assamheritage.com</span>
+                                <button class="copy-btn" onclick="copyToClipboard('vendor@assamheritage.com')">Copy</button>
                             </div>
                             <div class="credential-value" style="margin-top: 8px;">
                                 <span>Vendor@123</span>
@@ -361,8 +361,8 @@
                         <div class="credential-item">
                             <div class="credential-label">👤 Customer Account</div>
                             <div class="credential-value">
-                                <span>customer@assamHeritage.com</span>
-                                <button class="copy-btn" onclick="copyToClipboard('customer@assamHeritage.com')">Copy</button>
+                                <span>customer@assamheritage.com</span>
+                                <button class="copy-btn" onclick="copyToClipboard('customer@assamheritage.com')">Copy</button>
                             </div>
                             <div class="credential-value" style="margin-top: 8px;">
                                 <span>Customer@123</span>
@@ -456,35 +456,40 @@
     <script>
         function initializeDemoAccounts() {
             const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-            if (existingUsers.length === 0) {
-                const demoUsers = [
-                    {
-                        id: 1,
-                        name: 'Admin User',
-                        email: 'admin@assamHeritage.com',
-                        password: 'Admin@123',
-                        role: 'admin',
-                        createdAt: new Date().toISOString()
-                    },
-                    {
-                        id: 2,
-                        name: 'Vendor User',
-                        email: 'vendor@assamHeritage.com',
-                        password: 'Vendor@123',
-                        role: 'vendor',
-                        createdAt: new Date().toISOString()
-                    },
-                    {
-                        id: 3,
-                        name: 'Customer User',
-                        email: 'customer@assamHeritage.com',
-                        password: 'Customer@123',
-                        role: 'customer',
-                        createdAt: new Date().toISOString()
-                    }
-                ];
-                localStorage.setItem('users', JSON.stringify(demoUsers));
-            }
+            const demoUsers = [
+                {
+                    id: 1,
+                    name: 'Admin User',
+                    email: 'admin@assamheritage.com',
+                    password: 'Admin@123',
+                    role: 'admin',
+                    createdAt: new Date().toISOString()
+                },
+                {
+                    id: 2,
+                    name: 'Vendor User',
+                    email: 'vendor@assamheritage.com',
+                    password: 'Vendor@123',
+                    role: 'vendor',
+                    createdAt: new Date().toISOString()
+                },
+                {
+                    id: 3,
+                    name: 'Customer User',
+                    email: 'customer@assamheritage.com',
+                    password: 'Customer@123',
+                    role: 'customer',
+                    createdAt: new Date().toISOString()
+                }
+            ];
+
+            demoUsers.forEach(demo => {
+                if (!existingUsers.find(u => u.email === demo.email)) {
+                    existingUsers.push(demo);
+                }
+            });
+
+            localStorage.setItem('users', JSON.stringify(existingUsers));
         }
 
         function copyToClipboard(text) {
@@ -516,7 +521,7 @@
 
         function handleLogin(event) {
             event.preventDefault();
-            const email = document.getElementById('loginEmail').value.trim();
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
             const password = document.getElementById('loginPassword').value;
 
             if (!email || !password) {
@@ -525,13 +530,19 @@
             }
 
             const users = JSON.parse(localStorage.getItem('users')) || [];
-            const user = users.find(u => u.email === email && u.password === password);
+            const user = users.find(u => u.email.toLowerCase() === email && u.password === password);
 
             if (user) {
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 showAlert(`Welcome back, ${user.name}! Redirecting...`, 'success');
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    if (user.role === "admin") {
+                        window.location.href = "admin-dashboard.html"
+                    } else if (user.role === "vendor") {
+                        window.location.href = "vendor-dashboard.html"
+                    } else {
+                        window.location.href = "index.html"
+                    }
                 }, 1500);
             } else {
                 showAlert('Invalid email or password. Please try again.', 'danger');
@@ -542,7 +553,7 @@
         function handleSignup(event) {
             event.preventDefault();
             const name = document.getElementById('signupName').value.trim();
-            const email = document.getElementById('signupEmail').value.trim();
+            const email = document.getElementById('signupEmail').value.trim().toLowerCase();
             const password = document.getElementById('signupPassword').value;
             const confirmPassword = document.getElementById('signupConfirmPassword').value;
 
@@ -562,7 +573,7 @@
             }
 
             const users = JSON.parse(localStorage.getItem('users')) || [];
-            if (users.find(u => u.email === email)) {
+            if (users.find(u => u.email.toLowerCase() === email)) {
                 showAlert('Email already registered. Please login instead.', 'danger');
                 return;
             }
