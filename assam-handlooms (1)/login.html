@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login -ASSAM HERITAGE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Professional login page styling */
+        .login-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #8b6f47 0%, #d4a574 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .login-left {
+            background: linear-gradient(135deg, #8b6f47 0%, #6a5436 100%);
+            color: white;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .login-left h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-left p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .demo-credentials {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            backdrop-filter: blur(10px);
+            text-align: left;
+        }
+
+        .demo-credentials h5 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .credential-item {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #ffd700;
+        }
+
+        .credential-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .credential-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .credential-value {
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            word-break: break-all;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .login-right {
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-form-header {
+            margin-bottom: 40px;
+        }
+
+        .login-form-header h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c2c2c;
+            margin-bottom: 10px;
+        }
+
+        .login-form-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #2c2c2c;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #8b6f47;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(139, 111, 71, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .form-check {
+            margin-bottom: 20px;
+        }
+
+        .form-check input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #8b6f47;
+        }
+
+        .form-check label {
+            margin-left: 8px;
+            cursor: pointer;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: #8b6f47;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #6a5436;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #8b6f47 0%, #6a5436 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 111, 71, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .signup-link {
+            text-align: center;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .signup-link a {
+            color: #8b6f47;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .signup-link a:hover {
+            color: #6a5436;
+        }
+
+        .alert-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        .alert-message.show {
+            display: block;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-toggle {
+            display: none;
+        }
+
+        .form-toggle.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .login-left {
+                padding: 40px 30px;
+                display: none;
+            }
+
+            .login-right {
+                padding: 40px 30px;
+            }
+
+            .login-form-header h3 {
+                font-size: 1.5rem;
+            }
+
+            .demo-credentials {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-wrapper">
+            <!-- Left Side - Branding & Demo Credentials -->
+            <div class="login-left">
+                <div>
+                    <h2><i class="fas fa-handshake"></i>ASSAM HERITAGE</h2>
+                    <p>Authentic Handwoven Textiles from Assam</p>
+                    
+                    <!-- Demo credentials display -->
+                    <div class="demo-credentials">
+                        <h5><i class="fas fa-key"></i> Demo Credentials</h5>
+                        
+                        <div class="credential-item">
+                            <div class="credential-label">👨‍💼 Admin Account</div>
+                            <div class="credential-value">
+                                <span>admin@assamHeritage.com</span>
+                                <button class="copy-btn" onclick="copyToClipboard('admin@assamHeritage.com')">Copy</button>
+                            </div>
+                            <div class="credential-value" style="margin-top: 8px;">
+                                <span>Admin@123</span>
+                                <button class="copy-btn" onclick="copyToClipboard('Admin@123')">Copy</button>
+                            </div>
+                        </div>
+
+                        <div class="credential-item">
+                            <div class="credential-label">🏪 Vendor Account</div>
+                            <div class="credential-value">
+                                <span>vendor@assamHeritage.com</span>
+                                <button class="copy-btn" onclick="copyToClipboard('vendor@assamHeritage.com')">Copy</button>
+                            </div>
+                            <div class="credential-value" style="margin-top: 8px;">
+                                <span>Vendor@123</span>
+                                <button class="copy-btn" onclick="copyToClipboard('Vendor@123')">Copy</button>
+                            </div>
+                        </div>
+
+                        <div class="credential-item">
+                            <div class="credential-label">👤 Customer Account</div>
+                            <div class="credential-value">
+                                <span>customer@assamHeritage.com</span>
+                                <button class="copy-btn" onclick="copyToClipboard('customer@assamHeritage.com')">Copy</button>
+                            </div>
+                            <div class="credential-value" style="margin-top: 8px;">
+                                <span>Customer@123</span>
+                                <button class="copy-btn" onclick="copyToClipboard('Customer@123')">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Login Form -->
+            <div class="login-right">
+                <div class="login-form-header">
+                    <h3 id="formTitle">Welcome Back</h3>
+                    <p id="formSubtitle">Sign in to your account</p>
+                </div>
+
+                <!-- Alert Messages -->
+                <div id="alertMessage" class="alert-message"></div>
+
+                <!-- Login Form -->
+                <form id="loginForm" class="form-toggle active" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="rememberMe" class="form-check-input">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+
+                    <div class="forgot-password">
+                        <a href="#"><i class="fas fa-question-circle"></i> Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+
+                    <div class="signup-link">
+                        Don't have an account? <a href="#" onclick="toggleForms(event)">Create one</a>
+                    </div>
+                </form>
+
+                <!-- Sign Up Form -->
+                <form id="signupForm" class="form-toggle" onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label for="signupName"><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="signupName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupPassword"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="signupPassword" placeholder="Create a strong password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupConfirmPassword"><i class="fas fa-lock"></i> Confirm Password</label>
+                        <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <label class="form-check-label" for="agreeTerms">I agree to Terms & Conditions</label>
+                    </div>
+
+                    <button type="submit" class="login-btn">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+
+                    <div class="signup-link">
+                        Already have an account? <a href="#" onclick="toggleForms(event)">Sign in</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function initializeDemoAccounts() {
+            const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+            if (existingUsers.length === 0) {
+                const demoUsers = [
+                    {
+                        id: 1,
+                        name: 'Admin User',
+                        email: 'admin@assamHeritage.com',
+                        password: 'Admin@123',
+                        role: 'admin',
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: 2,
+                        name: 'Vendor User',
+                        email: 'vendor@assamHeritage.com',
+                        password: 'Vendor@123',
+                        role: 'vendor',
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: 3,
+                        name: 'Customer User',
+                        email: 'customer@assamHeritage.com',
+                        password: 'Customer@123',
+                        role: 'customer',
+                        createdAt: new Date().toISOString()
+                    }
+                ];
+                localStorage.setItem('users', JSON.stringify(demoUsers));
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showAlert('Copied to clipboard!', 'success');
+            }).catch(() => {
+                showAlert('Failed to copy', 'danger');
+            });
+        }
+
+        function toggleForms(event) {
+            event.preventDefault();
+            document.getElementById('loginForm').classList.toggle('active');
+            document.getElementById('signupForm').classList.toggle('active');
+            
+            const title = document.getElementById('formTitle');
+            const subtitle = document.getElementById('formSubtitle');
+            
+            if (document.getElementById('loginForm').classList.contains('active')) {
+                title.textContent = 'Welcome Back';
+                subtitle.textContent = 'Sign in to your account';
+            } else {
+                title.textContent = 'Create Account';
+                subtitle.textContent = 'JoinASSAM HERITAGE today';
+            }
+            
+            document.getElementById('alertMessage').innerHTML = '';
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) {
+                showAlert('Please fill in all fields', 'danger');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                showAlert(`Welcome back, ${user.name}! Redirecting...`, 'success');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            } else {
+                showAlert('Invalid email or password. Please try again.', 'danger');
+                document.getElementById('loginPassword').value = '';
+            }
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+            if (!name || !email || !password || !confirmPassword) {
+                showAlert('Please fill in all fields', 'danger');
+                return;
+            }
+
+            if (password.length < 6) {
+                showAlert('Password must be at least 6 characters long', 'danger');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showAlert('Passwords do not match', 'danger');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            if (users.find(u => u.email === email)) {
+                showAlert('Email already registered. Please login instead.', 'danger');
+                return;
+            }
+
+            const newUser = {
+                id: Date.now(),
+                name,
+                email,
+                password,
+                role: 'customer',
+                createdAt: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+
+            showAlert('Account created successfully! Redirecting...', 'success');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        }
+
+        function showAlert(message, type) {
+            const alertDiv = document.getElementById('alertMessage');
+            alertDiv.className = `alert-message show alert-${type}`;
+            alertDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                ${message}
+            `;
+
+            setTimeout(() => {
+                alertDiv.classList.remove('show');
+            }, 4000);
+        }
+
+        // Initialize demo accounts on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeDemoAccounts();
+        });
+    </script>
+</body>
+</html>

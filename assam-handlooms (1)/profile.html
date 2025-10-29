@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile -ASSAM HERITAGE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-weaving text-primary"></i>ASSAM HERITAGE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Shop</a></li>
+                </ul>
+                <div class="ms-3 d-flex gap-2">
+                    <a href="cart.html" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-shopping-cart"></i> <span id="cartCount">0</span>
+                    </a>
+                    <button class="btn btn-primary btn-sm" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="row g-4">
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-user-circle" style="font-size: 60px; color: var(--primary);"></i>
+                        </div>
+                        <h5 id="profileName">User Name</h5>
+                        <p class="text-muted small" id="profileEmail">user@email.com</p>
+                        <hr>
+                        <div class="list-group">
+                            <a href="#profile" class="list-group-item list-group-item-action active" onclick="showTab('profile')">
+                                <i class="fas fa-user"></i> Profile Info
+                            </a>
+                            <a href="#orders" class="list-group-item list-group-item-action" onclick="showTab('orders')">
+                                <i class="fas fa-box"></i> My Orders
+                            </a>
+                            <a href="#addresses" class="list-group-item list-group-item-action" onclick="showTab('addresses')">
+                                <i class="fas fa-map-marker-alt"></i> Addresses
+                            </a>
+                            <a href="#settings" class="list-group-item list-group-item-action" onclick="showTab('settings')">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <!-- Profile Tab -->
+                <div id="profile-tab" class="tab-content">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Profile Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="profileForm">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="profileEmailInput" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" class="form-control" id="phone" placeholder="+91 98765 43210">
+                                </div>
+                                <button type="submit" class="btn btn-primary" onclick="saveProfile(event)">Save Changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders Tab -->
+                <div id="orders-tab" class="tab-content d-none">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Order History</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="ordersList">
+                                <!-- Orders loaded by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Addresses Tab -->
+                <div id="addresses-tab" class="tab-content d-none">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Saved Addresses</h5>
+                            <button class="btn btn-light btn-sm" onclick="showAddressForm()">
+                                <i class="fas fa-plus"></i> Add Address
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div id="addressesList">
+                                <!-- Addresses loaded by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settings-tab" class="tab-content d-none">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Account Settings</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <h6 class="fw-bold mb-3">Change Password</h6>
+                                <form id="passwordForm">
+                                    <div class="mb-3">
+                                        <label class="form-label">Current Password</label>
+                                        <input type="password" class="form-control" id="currentPassword" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">New Password</label>
+                                        <input type="password" class="form-control" id="newPassword" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Confirm Password</label>
+                                        <input type="password" class="form-control" id="confirmPassword" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" onclick="changePassword(event)">Update Password</button>
+                                </form>
+                            </div>
+                            <hr>
+                            <div>
+                                <h6 class="fw-bold mb-3">Preferences</h6>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                    <label class="form-check-label" for="emailNotifications">
+                                        Receive email notifications
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="smsNotifications">
+                                    <label class="form-check-label" for="smsNotifications">
+                                        Receive SMS notifications
+                                    </label>
+                                </div>
+                                <button class="btn btn-primary mt-3" onclick="savePreferences()">Save Preferences</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2025ASSAM HERITAGE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+            loadProfileData();
+            loadOrders();
+            loadAddresses();
+            updateCartCount();
+        });
+
+        function loadProfileData() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profileEmail').textContent = currentUser.email;
+            document.getElementById('firstName').value = currentUser.name.split(' ')[0];
+            document.getElementById('lastName').value = currentUser.name.split(' ')[1] || '';
+            document.getElementById('profileEmailInput').value = currentUser.email;
+            document.getElementById('phone').value = currentUser.phone || '';
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('d-none'));
+            document.getElementById(tabName + '-tab').classList.remove('d-none');
+            document.querySelectorAll('.list-group-item').forEach(el => el.classList.remove('active'));
+            event.target.closest('.list-group-item').classList.add('active');
+        }
+
+        function saveProfile(e) {
+            e.preventDefault();
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            currentUser.name = document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value;
+            currentUser.email = document.getElementById('profileEmailInput').value;
+            currentUser.phone = document.getElementById('phone').value;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            showNotification('Profile updated successfully!', 'success');
+        }
+
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const userOrders = orders.filter(o => o.userId === currentUser.id);
+            
+            const container = document.getElementById('ordersList');
+            if (userOrders.length === 0) {
+                container.innerHTML = '<p class="text-muted text-center py-5">No orders yet</p>';
+                return;
+            }
+
+            container.innerHTML = userOrders.map(order => `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-1"><strong>Order ID:</strong> #${order.id}</p>
+                                <p class="mb-1"><strong>Date:</strong> ${new Date(order.date).toLocaleDateString()}</p>
+                                <p class="mb-0"><strong>Total:</strong> ₹${order.total}</p>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <span class="badge bg-success">${order.status}</span>
+                                <button class="btn btn-sm btn-outline-primary ms-2" onclick="viewOrderDetails(${order.id})">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadAddresses() {
+            const addresses = JSON.parse(localStorage.getItem('addresses')) || [];
+            const container = document.getElementById('addressesList');
+            
+            if (addresses.length === 0) {
+                container.innerHTML = '<p class="text-muted text-center py-5">No addresses saved</p>';
+                return;
+            }
+
+            container.innerHTML = addresses.map((addr, idx) => `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <p class="mb-1"><strong>${addr.name}</strong></p>
+                                <p class="mb-1 text-muted">${addr.address}</p>
+                                <p class="mb-0 text-muted">${addr.city}, ${addr.state} ${addr.zip}</p>
+                            </div>
+                            <div class="col-md-2 text-end">
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteAddress(${idx})">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function changePassword(e) {
+            e.preventDefault();
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (newPassword !== confirmPassword) {
+                showNotification('Passwords do not match', 'danger');
+                return;
+            }
+
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            currentUser.password = newPassword;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            showNotification('Password changed successfully!', 'success');
+            document.getElementById('passwordForm').reset();
+        }
+
+        function savePreferences() {
+            const prefs = {
+                emailNotifications: document.getElementById('emailNotifications').checked,
+                smsNotifications: document.getElementById('smsNotifications').checked
+            };
+            localStorage.setItem('preferences', JSON.stringify(prefs));
+            showNotification('Preferences saved!', 'success');
+        }
+
+        function deleteAddress(idx) {
+            if (confirm('Delete this address?')) {
+                let addresses = JSON.parse(localStorage.getItem('addresses')) || [];
+                addresses.splice(idx, 1);
+                localStorage.setItem('addresses', JSON.stringify(addresses));
+                loadAddresses();
+                showNotification('Address deleted', 'info');
+            }
+        }
+    </script>
+</body>
+</html>
