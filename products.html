@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop -ASSAM HERITAGE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-weaving text-primary"></i>ASSAM HERITAGE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="products.html">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                <div class="ms-3 d-flex gap-2">
+                    <a href="wishlist.html" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-heart"></i> <span id="wishlistCount">0</span>
+                    </a>
+                    <a href="cart.html" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-shopping-cart"></i> <span id="cartCount">0</span>
+                    </a>
+                    <button class="btn btn-primary btn-sm" onclick="checkAuth()">
+                        <i class="fas fa-user"></i> <span id="userDisplay">Login</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <!-- Sidebar Filters -->
+            <div class="col-lg-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Filters</h5>
+
+                        <!-- Search -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Search</label>
+                            <input type="text" class="form-control" id="searchInput" placeholder="Search products..." onkeyup="filterProducts()">
+                        </div>
+
+                        <!-- Category Filter -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Category</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="cat1" value="Sarees" onchange="filterProducts()">
+                                <label class="form-check-label" for="cat1">Sarees</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="cat2" value="Mekhela Chador" onchange="filterProducts()">
+                                <label class="form-check-label" for="cat2">Mekhela Chador</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="cat3" value="Fabrics" onchange="filterProducts()">
+                                <label class="form-check-label" for="cat3">Fabrics</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="cat4" value="Accessories" onchange="filterProducts()">
+                                <label class="form-check-label" for="cat4">Accessories</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="cat5" value="Shawls" onchange="filterProducts()">
+                                <label class="form-check-label" for="cat5">Shawls</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="cat6" value="Dupattas" onchange="filterProducts()">
+                                <label class="form-check-label" for="cat6">Dupattas</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="cat7" value="Bed Linens" onchange="filterProducts()">
+                                <label class="form-check-label" for="cat7">Bed Linens</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="cat8" value="Ethnic Wear" onchange="filterProducts()">
+                                <label class="form-check-label" for="cat8">Ethnic Wear</label>
+                            </div>
+                        </div>
+
+                        <!-- Price Filter -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Price Range</label>
+                            <input type="range" class="form-range" id="priceRange" min="0" max="50000" value="50000" onchange="filterProducts()">
+                            <small class="text-muted">Up to ₹<span id="priceValue">50000</span></small>
+                        </div>
+
+                        <!-- Rating Filter -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Rating</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rating5" value="5" onchange="filterProducts()">
+                                <label class="form-check-label" for="rating5">
+                                    <i class="fas fa-star text-warning"></i> 5 Stars
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rating4" value="4" onchange="filterProducts()">
+                                <label class="form-check-label" for="rating4">
+                                    <i class="fas fa-star text-warning"></i> 4+ Stars
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rating3" value="3" onchange="filterProducts()">
+                                <label class="form-check-label" for="rating3">
+                                    <i class="fas fa-star text-warning"></i> 3+ Stars
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-outline-primary w-100" onclick="resetFilters()">Reset Filters</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="col-lg-9">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="fw-bold">All Products</h3>
+                    <select class="form-select w-auto" id="sortBy" onchange="filterProducts()">
+                        <option value="newest">Newest</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+
+                <div class="row g-4" id="productsContainer">
+                    <!-- Products loaded by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h5>About Us</h5>
+                    <p>AssamHeritage connects you with authentic handwoven textiles from Assam's finest artisans.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Shop</a></li>
+                        <li><a href="#" class="text-white-50">About</a></li>
+                        <li><a href="#" class="text-white-50">Contact</a></li>
+                        <li><a href="#" class="text-white-50">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact</h5>
+                    <p class="text-white-50">
+                        Email: info@assamheritage.com<br>
+                        Phone: +91 98765 43210
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Follow Us</h5>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white-50"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white-50"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white-50"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            displayProducts(getProducts());
+            updateCartCount();
+            updateWishlistCount();
+        });
+
+        function displayProducts(products) {
+            const container = document.getElementById('productsContainer');
+            if (products.length === 0) {
+                container.innerHTML = '<div class="col-12"><p class="text-center text-muted">No products found</p></div>';
+                return;
+            }
+            container.innerHTML = products.map(product => `
+                <div class="col-md-6 col-lg-4">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}">
+                            <span class="badge bg-danger position-absolute top-0 end-0 m-2">${product.discount}% OFF</span>
+                            <div class="product-overlay">
+                                <a href="product-detail.html?id=${product.id}" class="btn btn-primary btn-sm me-2">View</a>
+                                <button class="btn btn-outline-light btn-sm" onclick="toggleWishlist(${product.id})">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h6>${product.name}</h6>
+                            <p class="text-muted small">${product.category}</p>
+                            <div class="mb-2">
+                                <span class="text-warning"><i class="fas fa-star"></i> ${product.rating}</span>
+                                <span class="text-muted small">(${product.reviews} reviews)</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-bold">₹${product.price}</span>
+                                    <span class="text-muted text-decoration-line-through small">₹${product.originalPrice}</span>
+                                </div>
+                                <button class="btn btn-sm btn-primary" onclick="addToCart(${product.id})">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const selectedCategories = Array.from(document.querySelectorAll('input[id^="cat"]:checked')).map(el => el.value);
+            const maxPrice = parseInt(document.getElementById('priceRange').value);
+            const selectedRatings = Array.from(document.querySelectorAll('input[id^="rating"]:checked')).map(el => parseInt(el.value));
+            const sortBy = document.getElementById('sortBy').value;
+
+            document.getElementById('priceValue').textContent = maxPrice;
+
+            let filtered = getProducts().filter(product => {
+                const matchesSearch = product.name.toLowerCase().includes(searchTerm) || product.category.toLowerCase().includes(searchTerm);
+                const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category);
+                const matchesPrice = product.price <= maxPrice;
+                const matchesRating = selectedRatings.length === 0 || selectedRatings.some(rating => product.rating >= rating);
+
+                return matchesSearch && matchesCategory && matchesPrice && matchesRating;
+            });
+
+            // Sort
+            if (sortBy === 'price-low') filtered.sort((a, b) => a.price - b.price);
+            else if (sortBy === 'price-high') filtered.sort((a, b) => b.price - a.price);
+            else if (sortBy === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+
+            displayProducts(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
+            document.getElementById('priceRange').value = 50000;
+            document.getElementById('sortBy').value = 'newest';
+            filterProducts();
+        }
+    </script>
+</body>
+</html>
